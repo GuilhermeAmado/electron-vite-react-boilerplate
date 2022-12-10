@@ -20,6 +20,10 @@ const preload = join(__dirname, './preload.js');
 const url = process.env['VITE_DEV_SERVER_URL'];
 
 function createWindow() {
+  if (!process.env.DIST || !process.env.PUBLIC) {
+    throw new Error('Missing DIST and PUBLIC paths');
+  }
+
   win = new BrowserWindow({
     icon: join(process.env.PUBLIC, 'logo.svg'),
     webPreferences: {
